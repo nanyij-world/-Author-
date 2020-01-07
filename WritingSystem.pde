@@ -32,6 +32,8 @@ void setup(){
   mcharWidSum=border+50;
   pos = new PVector(width/2,height/2);
   
+  
+  //fill in the Author array with letter content 
   for (int i = 0; i < la; i++) {
      a[i] = new AuthorLetter(x1, y1, Author.charAt(i));  
      x1 += textWidth(Author.charAt(i))+5; 
@@ -43,6 +45,7 @@ void setup(){
        }  
      }
      
+  //fill in the Mine array with letter content 
    for (int i =0; i <lm;i++){
     m[i]=new MineLetter(pos,Mine.charAt(i),x2,y2);
     x2 += textWidth(Mine.charAt(i))+5; 
@@ -67,6 +70,7 @@ void draw(){
   background(255);
   for (int j =0; j<lm;j++){
     if (mousePressed){
+    //if mouse Pressed, letters will move back to home position
         pushMatrix();
         textFont(my);
         textSize(12+sizeinc);
@@ -83,13 +87,11 @@ void draw(){
     }
   }
   
+  //if the Mine letters touch the Author letters, size and color will change 
   for (int i = 0; i < la; i++) {
     if (abs((a[i].y()- mouseY)) <= 2 && abs((a[i].x())-mouseX)<=2){
        sizeinc += 1;
        colchange += 10;
-       //if (sizeinc >= 15){
-       //  sizeinc += -1;
-       //}
     }
     
     if (key == TAB){
@@ -108,6 +110,7 @@ void draw(){
           
          }
     }else{
+    // the start screen
       fill(0);
       noStroke();
       rect(0,0,width,height);
@@ -121,6 +124,7 @@ void draw(){
       text("Press tab to start", width/2-100, height/2+25);
       text("Press any key to exit", width/2-120, height/2+55);
       popMatrix();
+    //every new start will generate a new random color and reset size increase and color change 
       col1 = random(100,200);
       col2 = random(100,255);
       col3 = random(100,255);
